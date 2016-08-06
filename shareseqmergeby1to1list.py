@@ -70,8 +70,7 @@ for folder in folderlist:
 
 reflist = [list(d.keys()) for d in refiddictlist]
 shareref = set.intersection(*map(set,reflist))
-# shareref = reduce(set.intersection, map(set, [list(d.values()) for d in refiddictlist]))
-# shareref = reduce(lambda x, y: x&y, (set(d.values()) for d in refiddictlist))
+
 
 for sharerefid in shareref:
 	shareseqcombine = open(sharerefid+".fas","w")
@@ -81,8 +80,7 @@ for sharerefid in shareref:
 		seq3 = seq2[1:]
 		seq4 = [seq.partition("\n") for seq in seq3]
 		seq5 = {seq[0]:seq[2].replace("\n","") for seq in seq4}
-		# seq5 = [[seq[0],seq[2].replace("\n","")] for seq in seq4]
-		# seq6 = dict((seq[0],seq[1]) for seq in seq5)	
+	
 
 		if sharerefid in folderrefiddictdict[ws].keys():
 			seqname = folderrefiddictdict[ws][sharerefid]
@@ -93,13 +91,7 @@ for sharerefid in shareref:
 	
 	
 
-	
-# print folderrefiddictdict
-# print reflist
-# print shareref		
-# print refiddictlist
-# print folderpathdict
-# print folderseqdict
+
 
 
 	
