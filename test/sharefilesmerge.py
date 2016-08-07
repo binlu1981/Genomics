@@ -42,7 +42,6 @@ for id in sharefilelist:
 		for folder in folderlist:
 			pathlist.append(os.path.join(cwd,folder,id))
 		for sharefile in pathlist:
-			# print file
 			tempfile = open(sharefile).read()
 			if tempfile[-1] != "\n":
 				tempfile+="\n"
