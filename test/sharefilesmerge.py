@@ -17,8 +17,6 @@ for folder in folderlist:
 """find the intersection id name"""
 filelistslist = []
 for d in filediclist:
-	# print d.values()	
-	# filelistslist+=d.values()
 	filelistslist.extend(d.values())
 # print filelistslist
 # sharefile = set.intersection(*map(set,filelistslist))
