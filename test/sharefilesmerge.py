@@ -5,7 +5,6 @@ shareid = open("shareID.txt",'w')
 
 """make a list contain mutiple dicts (key:foldname,value:filename in folders)"""
 cwd = os.getcwd()
-# print cwd
 # print os.path.split(cwd)
 # print os.listdir(cwd)
 # for root, dirs, files in os.walk(cwd):
