@@ -10,10 +10,9 @@ filediclist = []
 for folder in folderlist:
 	dic = {}
 	filelist = os.listdir(os.path.join(cwd,folder))
-	# print os.path.join(cwd,folder)
 	dic[folder] = filelist
 	filediclist.append(dic)
-# print filediclist
+
 
 """find the intersection id name"""
 filelistslist = []
