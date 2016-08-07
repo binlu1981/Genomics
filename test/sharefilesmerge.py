@@ -18,8 +18,6 @@ for folder in folderlist:
 filelistslist = []
 for d in filediclist:
 	filelistslist.extend(d.values())
-# print filelistslist
-# sharefile = set.intersection(*map(set,filelistslist))
 sharefile = reduce(set.intersection, map(set, filelistslist))
 sharefilelist = list(sharefile)
 sharefileid = ("\n").join(sharefilelist)
