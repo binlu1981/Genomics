@@ -2,7 +2,7 @@ import os
 import shutil
 
 shareid = open("shareID.txt",'w')
-
+#a
 """make a list contain mutiple dicts (key:foldname,value:filename in folders)"""
 cwd = os.getcwd()
 folderlist = next(os.walk(cwd))[1]
