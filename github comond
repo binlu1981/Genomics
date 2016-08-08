@@ -10,6 +10,7 @@ git add .
 git commit -a -m 'Added some files'
 git push origin master
 
+
 #if you modify script on github web , then want to sync to local disk
 cd ./folder
 git pull origin master
