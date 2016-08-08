@@ -58,6 +58,10 @@ git checkout master
 git merge new-branch
 git push origin master
 #git push --force origin master
+#if you modify a file on master and want to merge it to your branch
+git checkout new-branch
+git merge master
+git push origin master
 git log -c
 #git log -p -m -c
 git branch -d new-branch
