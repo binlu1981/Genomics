@@ -1,0 +1,130 @@
+http://blog.csdn.net/ithomer/article/details/7529022
+git  clone  https://github.com/binlu1981/GenomicPips.git ./GenomicPips
+cd GenomicPips
+mkdir ./new
+#can't be empty, copy some file to here
+cd new
+cp path/to/files ./
+git add .
+#git add folder/subfolder/*
+git commit -a -m 'Added some files'
+git push origin master
+
+#if you modify script on github web , then want to sync to local disk
+cd ./folder
+git pull origin master
+
+#then you modify script on disk, then want to sync to gihub web
+cd ./folder
+git add sharefilesmerge.py
+git commit -m 'new feature: bige update'
+git push origin master
+
+#check update or modify
+git status
+
+#check history record and version SHA
+git log
+
+#back to early version only work for local disk, then you must sync local to remote
+git revert 42985974368d65a2923d2b8d221cf03e5bcb97cf
+git push origin master
+#git revert SHA again will cancal last rollback 
+git revert HEAD
+git push origin master
+
+#if you want to rollback on both disk and remote at once, and delete last history record
+git reset --hard commit_id
+#you can also use HEAD, HEAD is current version, HEAD^ is last version, HEAD^^ is last last-version
+git reset --hard HEAD^ 
+git push -f
+#you can check commit id (simple) using:
+git reflog
+
+
+#Switching branch and master also switch version, master can restore stable and release version, branch can code beta version and new feature, it is safe to use branch coding
+#code on branch (bob, mike...)rather thant master, then merge branch and master. also can creat branch on branch
+git branch
+git branch new-branch
+git checkout new-branch
+#creat+switch
+#git checkout -b new-branch
+#then modify your local script
+git add sharefilesmerge.py
+git commit -m "branch modify"
+git push --set-upstream origin new-branch
+git checkout master
+#merge local disk file
+git merge new-branch
+git push origin master
+#git push --force origin master
+git log -c
+#git log -p -m -c
+git branch -d new-branch
+#before merge, you can not delete new-branch, you can force to do it
+git branch -D new-branch
+
+git remote -v
+
+#both modified on master and branch will lead to conflicts. fix conflicts and then commit the result
+git status
+#if git tell you there is a modify, you can check use
+git diff readme.txt
+
+creat tag, such as version number, only on local disk, you can push to remote
+git tag
+#for newest commit
+git tag v1.0
+#for history commits
+git log --pretty=oneline --abbrev-commit
+#6224937 add merge
+#59bc1cb conflict fixed
+git tag v0.9 6224937
+git tag -a v0.1 -m "version 0.1 released" 3628164
+git show v1.0
+#delete local disk tag
+git tag -d v1.0
+#push tags to remote
+git push origin v1.0
+#for all tags
+git push origin --tags
+#delete tag on remote
+git push origin :refs/tags/v1.0
+
+
+
+#creat a local repository
+mkdir learngit
+cd learngit
+pwd
+#/Users/michael/learngit
+#or a empty folder under windows
+git init
+#Initialized empty Git repository in /Users/michael/learngit/.git/
+#build a new file such as text, never use window's notepad(head includ 0xefbbbf), use notepad++
+git add file1.txt
+git add file2.txt file3.txt
+git commit -m "add 3 files."
+git status
+git diff readme.txt
+
+
+#if git status tell you "Changes not staged for commit:" or "Untracked files:"
+#you need add your file to Temporary storage area(stage). After you make modify, first step must be "add", then "commit"
+git add .
+#commit can submit all ralated modify to branch or master, stage region will be clean
+git commit -m "understand how stage works"
+#you can check difference between local work space version and remote stage region version
+git diff HEAD -- readme.txt
+#if not message here, local and remote version are identical
+#you also can delete file on remote
+git rm test.txt
+#if it's a mistake, you can recover it
+git reset --hard HEAD^
+
+#link local repository to remote repository
+git remote add origin git@github.com:michaelliao/learngit.git
+#for first time link
+git push -u origin master
+#clone remote repo to local disk
+git clone git@github.com:michaelliao/gitskills.git
