@@ -1,3 +1,4 @@
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 http://blog.csdn.net/ithomer/article/details/7529022
 git  clone  https://github.com/binlu1981/GenomicPips.git ./GenomicPips
 cd GenomicPips
@@ -78,6 +79,19 @@ git remote -v
 git status
 #if git tell you there is a modify, you can check use
 git diff readme.txt
+#to check the difference between different version on different branch
+git status -sb
+git diff master..origin/master^
+git diff origin/master..master^^
+git diff master..origin/master~5
+git diff master..origin/new-branch^
+#show how much commits each branch is ahead of the other
+git rev-list --left-right --count master...test-branch
+#1       7
+#compared to master, test-branch is 7 commits ahead and 1 commit behind
+#or master has 1 commits ahead, and test-branch has 7 commits ahead
+
+
 
 creat tag, such as version number, only on local disk, you can push to remote
 git tag
