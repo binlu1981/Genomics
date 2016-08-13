@@ -1,3 +1,1298 @@
+SciPy Numpy_Example_List
+Attachments
+This page contains a large database of examples demonstrating most of the Numpy functionality. Numpy_Example_List_With_Doc has these examples interleaved with the built-in documentation, but is not as regularly updated as this page. The examples here can be easily accessed from Python using the Numpy_Example_Fetcher.
+
+This example list is incredibly useful, and we would like to get all the good examples and comments integrated in the official numpy documentation so that they are also shipped with numpy. You can help. The official numpy documentation can be edited on http://docs.scipy.org.
+
+
+Contents
+...
+[]
+abs()
+absolute()
+accumulate()
+add()
+all()
+allclose()
+alltrue()
+angle()
+any()
+append()
+apply_along_axis()
+apply_over_axes()
+arange()
+arccos()
+arccosh()
+arcsin()
+arcsinh()
+arctan()
+arctan2()
+arctanh()
+argmax()
+argmin()
+argsort()
+array()
+arrayrange()
+array_split()
+asarray()
+asanyarray()
+asmatrix()
+astype()
+atleast_1d()
+atleast_2d()
+atleast_3d()
+average()
+beta()
+binary_repr()
+bincount()
+binomial()
+bitwise_and()
+bitwise_or()
+bitwise_xor()
+bmat()
+broadcast()
+bytes()
+c_[]
+cast[]()
+ceil()
+choose()
+clip()
+column_stack()
+compress()
+concatenate()
+conj()
+conjugate()
+copy()
+corrcoef()
+cos()
+cov()
+cross()
+cumprod()
+cumsum()
+delete()
+det()
+diag()
+diagflat()
+diagonal()
+diff()
+digitize()
+dot()
+dsplit()
+dstack()
+dtype()
+empty()
+empty_like()
+expand_dims()
+eye()
+fft()
+fftfreq()
+fftshift()
+fill()
+finfo()
+fix()
+flat
+flatten()
+fliplr()
+flipud()
+floor()
+fromarrays()
+frombuffer()
+fromfile()
+fromfunction()
+fromiter()
+generic
+gumbel()
+histogram()
+hsplit()
+hstack()
+hypot()
+identity()
+ifft()
+imag
+index_exp[]
+indices()
+inf
+inner()
+insert()
+inv()
+iscomplex()
+iscomplexobj()
+item()
+ix_()
+lexsort()
+linspace()
+loadtxt()
+logical_and()
+logical_not()
+logical_or()
+logical_xor()
+logspace()
+lstsq()
+mat()
+matrix()
+max()
+maximum()
+mean()
+median()
+mgrid[]
+min()
+minimum()
+multiply()
+nan
+ndenumerate()
+ndim
+ndindex()
+newaxis
+nonzero()
+ogrid()
+ones()
+ones_like()
+outer()
+permutation()
+piecewise()
+pinv()
+poisson()
+poly1d()
+polyfit()
+prod()
+ptp()
+put()
+putmask()
+r_[]
+rand()
+randint()
+randn()
+random_integers()
+random_sample()
+ranf()
+ravel()
+real
+recarray()
+reduce()
+repeat()
+reshape()
+resize()
+rollaxis()
+round()
+rot90()
+s_[]
+sample()
+savetxt()
+searchsorted()
+seed()
+select()
+set_printoptions()
+shape
+shuffle()
+slice()
+solve()
+sometrue()
+sort()
+split()
+squeeze()
+std()
+standard_normal()
+sum()
+svd()
+swapaxes()
+T
+take()
+tensordot()
+tile()
+tofile()
+tolist()
+trace()
+transpose()
+tri()
+tril()
+trim_zeros()
+triu()
+typeDict()
+uniform()
+unique()
+unique1d()
+vander()
+var()
+vdot()
+vectorize()
+view()
+vonmises()
+vsplit()
+vstack()
+weibull()
+where()
+zeros()
+zeros_like()
+ 
+
+...
+
+
+>>> from numpy import *
+>>> a = arange(12)
+>>> a = a.reshape(3,2,2)
+>>> print a
+[[[ 0  1]
+  [ 2  3]]
+ [[ 4  5]
+  [ 6  7]]
+ [[ 8  9]
+  [10 11]]]
+>>> a[...,0]                               # same as a[:,:,0]
+array([[ 0,  2],
+       [ 4,  6],
+       [ 8, 10]])
+>>> a[1:,...] # same as a[1:,:,:] or just a[1:]
+array([[[ 4, 5],
+        [ 6, 7]],
+       [[ 8, 9],
+        [10, 11]]])
+See also: [], newaxis
+
+
+[]
+
+
+>>> from numpy import *
+>>> a = array([ [ 0, 1, 2, 3, 4],
+... [10,11,12,13,14],
+... [20,21,22,23,24],
+... [30,31,32,33,34] ])
+>>>
+>>> a[0,0] # indices start by zero
+0
+>>> a[-1] # last row
+array([30, 31, 32, 33, 34])
+>>> a[1:3,1:4] # subarray
+array([[11, 12, 13],
+       [21, 22, 23]])
+>>>
+>>> i = array([0,1,2,1]) # array of indices for the first axis
+>>> j = array([1,2,3,4]) # array of indices for the second axis
+>>> a[i,j]
+array([ 1, 12, 23, 14])
+>>>
+>>> a[a<13] # boolean indexing
+array([ 0, 1, 2, 3, 4, 10, 11, 12])
+>>>
+>>> b1 = array( [True,False,True,False] ) # boolean row selector
+>>> a[b1,:]
+array([[ 0, 1, 2, 3, 4],
+       [20, 21, 22, 23, 24]])
+>>>
+>>> b2 = array( [False,True,True,False,True] ) # boolean column selector
+>>> a[:,b2]
+array([[ 1, 2, 4],
+       [11, 12, 14],
+       [21, 22, 24],
+       [31, 32, 34]])
+See also: ..., newaxis, ix_, indices, nonzero, where, slice
+
+
+abs()
+
+
+>>> from numpy import *
+>>> abs(-1)
+1
+>>> abs(array([-1.2, 1.2]))
+array([ 1.2, 1.2])
+>>> abs(1.2+1j)
+1.5620499351813308
+See also: absolute, angle
+
+
+absolute()
+
+Synonym for abs()
+
+See abs
+
+
+accumulate()
+
+
+>>> from numpy import *
+>>> add.accumulate(array([1.,2.,3.,4.])) # like reduce() but also gives intermediate results
+array([ 1., 3., 6., 10.])
+>>> array([1., 1.+2., (1.+2.)+3., ((1.+2.)+3.)+4.]) # this is what it computed
+array([ 1., 3., 6., 10.])
+>>> multiply.accumulate(array([1.,2.,3.,4.])) # works also with other operands
+array([ 1., 2., 6., 24.])
+>>> array([1., 1.*2., (1.*2.)*3., ((1.*2.)*3.)*4.]) # this is what it computed
+array([ 1., 2., 6., 24.])
+>>> add.accumulate(array([[1,2,3],[4,5,6]]), axis = 0) # accumulate every column separately
+array([[1, 2, 3],
+       [5, 7, 9]])
+>>> add.accumulate(array([[1,2,3],[4,5,6]]), axis = 1) # accumulate every row separately
+array([[ 1, 3, 6],
+       [ 4, 9, 15]])
+See also: reduce, cumprod, cumsum
+
+
+add()
+
+
+>>> from numpy import *
+>>> add(array([-1.2, 1.2]), array([1,3]))
+array([-0.2, 4.2])
+>>> array([-1.2, 1.2]) + array([1,3])
+array([-0.2, 4.2])
+
+all()
+
+
+>>> from numpy import *
+>>> a = array([True, False, True])
+>>> a.all() # if all elements of a are True: return True; otherwise False
+False
+>>> all(a) # this form also exists
+False
+>>> a = array([1,2,3])
+>>> all(a > 0) # equivalent to (a > 0).all()
+True
+See also: any, alltrue, sometrue
+
+
+allclose()
+
+
+>>> allclose(array([1e10,1e-7]), array([1.00001e10,1e-8]))
+False
+>>> allclose(array([1e10,1e-8]), array([1.00001e10,1e-9]))
+True
+>>> allclose(array([1e10,1e-8]), array([1.0001e10,1e-9]))
+False
+
+alltrue()
+
+
+>>> from numpy import *
+>>> b = array([True, False, True, True])
+>>> alltrue(b)
+False
+>>> a = array([1, 5, 2, 7])
+>>> alltrue(a >= 5)
+False
+See also: sometrue, all, any
+
+
+angle()
+
+
+>>> from numpy import *
+>>> angle(1+1j) # in radians
+0.78539816339744828
+>>> angle(1+1j,deg=True) # in degrees
+45.0
+See also: real, imag, hypot
+
+
+any()
+
+
+>>> from numpy import *
+>>> a = array([True, False, True])
+>>> a.any() # gives True if at least 1 element of a is True, otherwise False
+True
+>>> any(a) # this form also exists
+True
+>>> a = array([1,2,3])
+>>> (a >= 1).any() # equivalent to any(a >= 1)
+True
+See also: all, alltrue, sometrue
+
+
+append()
+
+
+>>> from numpy import *
+>>> a = array([10,20,30,40])
+>>> append(a,50)
+array([10, 20, 30, 40, 50])
+>>> append(a,[50,60])
+array([10, 20, 30, 40, 50, 60])
+>>> a = array([[10,20,30],[40,50,60],[70,80,90]])
+>>> append(a,[[15,15,15]],axis=0)
+array([[10, 20, 30],
+       [40, 50, 60],
+       [70, 80, 90],
+       [15, 15, 15]])
+>>> append(a,[[15],[15],[15]],axis=1)
+array([[10, 20, 30, 15],
+       [40, 50, 60, 15],
+       [70, 80, 90, 15]])
+See also: insert, delete, concatenate
+
+
+apply_along_axis()
+
+
+>>> from numpy import *
+>>> def myfunc(a): # function works on a 1d arrays, takes the average of the 1st an last element
+... return (a[0]+a[-1])/2
+...
+>>> b = array([[1,2,3],[4,5,6],[7,8,9]])
+>>> apply_along_axis(myfunc,0,b) # apply myfunc to each column (axis=0) of b
+array([4, 5, 6])
+>>> apply_along_axis(myfunc,1,b) # apply myfunc to each row (axis=1) of b
+array([2, 5, 8])
+See also: apply_over_axes, vectorize
+
+
+apply_over_axes()
+
+
+>>> from numpy import *
+>>> a = arange(24).reshape(2,3,4) # a has 3 axes: 0,1 and 2
+>>> a
+array([[[ 0, 1, 2, 3],
+        [ 4, 5, 6, 7],
+        [ 8, 9, 10, 11]],
+       [[12, 13, 14, 15],
+        [16, 17, 18, 19],
+        [20, 21, 22, 23]]])
+>>> apply_over_axes(sum, a, [0,2]) # sum over all axes except axis=1, result has same shape as original
+array([[[ 60],
+        [ 92],
+        [124]]])
+See also: apply_along_axis, vectorize
+
+
+arange()
+
+
+>>> from numpy import *
+>>> arange(3)
+array([0, 1, 2])
+>>> arange(3.0)
+array([ 0., 1., 2.])
+>>> arange(3, dtype=float)
+array([ 0., 1., 2.])
+>>> arange(3,10) # start,stop
+array([3, 4, 5, 6, 7, 8, 9])
+>>> arange(3,10,2) # start,stop,step
+array([3, 5, 7, 9])
+See also: r_, linspace, logspace, mgrid, ogrid
+
+
+arccos()
+
+
+>>> from numpy import *
+>>> arccos(array([0, 1]))
+array([ 1.57079633, 0. ])
+See also: arcsin, arccosh, arctan, arctan2
+
+
+arccosh()
+
+
+>>> from numpy import *
+>>> arccosh(array([e, 10.0]))
+array([ 1.65745445, 2.99322285])
+See also: arccos, arcsinh, arctanh
+
+
+arcsin()
+
+
+>>> from numpy import *
+>>> arcsin(array([0, 1]))
+array([ 0. , 1.57079633])
+See also: arccos, arctan, arcsinh
+
+
+arcsinh()
+
+
+>>> from numpy import *
+>>> arcsinh(array([e, 10.0]))
+array([ 1.72538256, 2.99822295])
+See also: arccosh, arcsin, arctanh
+
+
+arctan()
+
+
+>>> from numpy import *
+>>> arctan(array([0, 1]))
+array([ 0. , 0.78539816])
+See also: arccos, arcsin, arctanh
+
+
+arctan2()
+
+
+>>> from numpy import *
+>>> arctan2(array([0, 1]), array([1, 0]))
+array([ 0. , 1.57079633])
+See also: arcsin, arccos, arctan, arctanh
+
+
+arctanh()
+
+
+>>> from numpy import *
+>>> arctanh(array([0, -0.5]))
+array([ 0. , -0.54930614])
+See also: arcsinh, arccosh, arctan, arctan2
+
+
+argmax()
+
+
+>>> from numpy import *
+>>> a = array([10,20,30])
+>>> maxindex = a.argmax()
+>>> a[maxindex]
+30
+>>> a = array([[10,50,30],[60,20,40]])
+>>> maxindex = a.argmax()
+>>> maxindex
+3
+>>> a.ravel()[maxindex]
+60
+>>> a.argmax(axis=0) # for each column: the row index of the maximum value
+array([1, 0, 1])
+>>> a.argmax(axis=1) # for each row: the column index of the maximum value
+array([1, 0])
+>>> argmax(a) # also exists, slower, default is axis=-1
+array([1, 0])
+See also: argmin, nan, min, max, maximum, minimum
+
+
+argmin()
+
+
+>>> from numpy import *
+>>> a = array([10,20,30])
+>>> minindex = a.argmin()
+>>> a[minindex]
+10
+>>> a = array([[10,50,30],[60,20,40]])
+>>> minindex = a.argmin()
+>>> minindex
+0
+>>> a.ravel()[minindex]
+10
+>>> a.argmin(axis=0) # for each column: the row index of the minimum value
+array([0, 1, 0])
+>>> a.argmin(axis=1) # for each row: the column index of the minimum value
+array([0, 1])
+>>> argmin(a) # also exists, slower, default is axis=-1
+array([0, 1])
+See also: argmax, nan, min, max, maximum, minimum
+
+
+argsort()
+
+argsort(axis=-1, kind="quicksort")
+
+
+>>> from numpy import *
+>>> a = array([2,0,8,4,1])
+>>> ind = a.argsort() # indices of sorted array using quicksort (default)
+>>> ind
+array([1, 4, 0, 3, 2])
+>>> a[ind] # same effect as a.sort()
+array([0, 1, 2, 4, 8])
+>>> ind = a.argsort(kind='merge') # algorithm options are 'quicksort', 'mergesort' and 'heapsort'
+>>> a = array([[8,4,1],[2,0,9]])
+>>> ind = a.argsort(axis=0) # sorts on columns. NOT the same as a.sort(axis=1)
+>>> ind
+array([[1, 1, 0],
+       [0, 0, 1]])
+>>> a[ind,[[0,1,2],[0,1,2]]] # 2-D arrays need fancy indexing if you want to sort them.
+array([[2, 0, 1],
+       [8, 4, 9]])
+>>> ind = a.argsort(axis=1) # sort along rows. Can use a.argsort(axis=-1) for last axis.
+>>> ind
+array([[2, 1, 0],
+       [1, 0, 2]])
+>>> a = ones(17)
+>>> a.argsort() # quicksort doesn't preserve original order.
+array([ 0, 14, 13, 12, 11, 10, 9, 15, 8, 6, 5, 4, 3, 2, 1, 7, 16])
+>>> a.argsort(kind="mergesort") # mergesort preserves order when possible. It is a stable sort.
+array([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+>>> ind = argsort(a) # there is a functional form
+See also: lexsort, sort
+
+
+array()
+
+
+>>> from numpy import *
+>>> array([1,2,3]) # conversion from a list to an array
+array([1, 2, 3])
+>>> array([1,2,3], dtype=complex) # output type is specified
+array([ 1.+0.j, 2.+0.j, 3.+0.j])
+>>> array(1, copy=0, subok=1, ndmin=1) # basically equivalent to atleast_1d
+array([1])
+>>> array(1, copy=0, subok=1, ndmin=2) # basically equivalent to atleast_2d
+array([[1]])
+>>> array(1, subok=1, ndmin=2) # like atleast_2d but always makes a copy
+array([[1]])
+>>> mydescriptor = {'names': ('gender','age','weight'), 'formats': ('S1', 'f4', 'f4')} # one way of specifying the data type
+>>> a = array([('M',64.0,75.0),('F',25.0,60.0)], dtype=mydescriptor) # recarray
+>>> print a
+[('M', 64.0, 75.0) ('F', 25.0, 60.0)]
+>>> a['weight']
+array([ 75., 60.], dtype=float32)
+>>> a.dtype.names # Access to the ordered field names
+('gender','age','weight')
+>>> mydescriptor = [('age',int16),('Nchildren',int8),('weight',float32)] # another way of specifying the data type
+>>> a = array([(64,2,75.0),(25,0,60.0)], dtype=mydescriptor)
+>>> a['Nchildren']
+array([2, 0], dtype=int8)
+>>> mydescriptor = dtype([('x', 'f4'),('y', 'f4'), # nested recarray
+... ('nested', [('i', 'i2'),('j','i2')])])
+>>> array([(1.0, 2.0, (1,2))], dtype=mydescriptor) # input one row
+array([(1.0, 2.0, (1, 2))],
+      dtype=[('x', '<f4'), ('y', '<f4'), ('nested', [('i', '<i2'), ('j', '<i2')])])
+>>> array([(1.0, 2.0, (1,2)), (2.1, 3.2, (3,2))], dtype=mydescriptor) # input two rows
+array([(1.0, 2.0, (1, 2)), (2.0999999046325684, 3.2000000476837158, (3, 2))],
+      dtype=[('x', '<f4'), ('y', '<f4'), ('nested', [('i', '<i2'), ('j', '<i2')])])
+>>> a=array([(1.0, 2.0, (1,2)), (2.1, 3.2, (3,2))], dtype=mydescriptor) # getting some columns
+>>> a['x'] # a plain column
+array([ 1. , 2.0999999], dtype=float32)
+>>> a['nested'] # a nested column
+array([(1, 2), (3, 2)],
+      dtype=[('i', '<i2'), ('j', '<i2')])
+>>> a['nested']['i'] # a plain column inside a nested column
+>>> mydescriptor = dtype([('x', 'f4'),('y', 'f4'), # nested recarray
+... ('nested', [('i', 'i2'),('j','i2')])])
+>>> array([(1.0, 2.0, (1,2))], dtype=mydescriptor) # input one row
+array([(1.0, 2.0, (1, 2))],
+      dtype=[('x', '<f4'), ('y', '<f4'), ('nested', [('i', '<i2'), ('j', '<i2')])])
+>>> array([(1.0, 2.0, (1,2)), (2.1, 3.2, (3,2))], dtype=mydescriptor) # input two rows
+array([(1.0, 2.0, (1, 2)), (2.0999999046325684, 3.2000000476837158, (3, 2))],
+      dtype=[('x', '<f4'), ('y', '<f4'), ('nested', [('i', '<i2'), ('j', '<i2')])])
+>>> a=array([(1.0, 2.0, (1,2)), (2.1, 3.2, (3,2))], dtype=mydescriptor) # getting some columns
+>>> a['x'] # a plain column
+array([ 1. , 2.0999999], dtype=float32)
+>>> a['nested'] # a nested column
+array([(1, 2), (3, 2)],
+      dtype=[('i', '<i2'), ('j', '<i2')])
+>>> a['nested']['i'] # a plain column inside a nested column
+array([1, 3], dtype=int16)
+See also: dtype, mat, asarray
+
+
+arrayrange()
+
+Synonym for arange()
+
+See arange
+
+
+array_split()
+
+
+>>> from numpy import *
+>>> a = array([[1,2,3,4],[5,6,7,8]])
+>>> array_split(a,2,axis=0) # split a in 2 parts. row-wise
+[array([[1, 2, 3, 4]]), array([[5, 6, 7, 8]])]
+>>> array_split(a,4,axis=1) # split a in 4 parts, column-wise
+[array([[1],
+       [5]]), array([[2],
+       [6]]), array([[3],
+       [7]]), array([[4],
+       [8]])]
+ >>> array_split(a,3,axis=1) # impossible to split in 3 equal parts -> first part(s) are bigger
+[array([[1, 2],
+       [5, 6]]), array([[3],
+       [7]]), array([[4],
+       [8]])]
+>>> array_split(a,[2,3],axis=1) # make a split before the 2nd and the 3rd column
+[array([[1, 2],
+       [5, 6]]), array([[3],
+       [7]]), array([[4],
+       [8]])]
+See also: dsplit, hsplit, vsplit, split, concatenate
+
+
+asarray()
+
+
+>>> from numpy import *
+>>> m = matrix('1 2; 5 8')
+>>> m
+matrix([[1, 2],
+       [5, 8]])
+>>> a = asarray(m) # a is array type with same contents as m -- data is not copied
+>>> a
+array([[1, 2],
+       [5, 8]])
+>>> m[0,0] = -99
+>>> m
+matrix([[-99, 2],
+       [ 5, 8]])
+>>> a # no copy was made, so modifying m modifies a, and vice versa
+array([[-99, 2],
+       [ 5, 8]])
+See also: asmatrix, array, matrix, mat
+
+
+asanyarray()
+
+
+>>> from numpy import *
+>>> a = array([[1,2],[5,8]])
+>>> a
+array([[1, 2],
+       [5, 8]])
+>>> m = matrix('1 2; 5 8')
+>>> m
+matrix([[1, 2],
+       [5, 8]])
+>>> asanyarray(a) # the array a is returned unmodified
+array([[1, 2],
+       [5, 8]])
+>>> asanyarray(m) # the matrix m is returned unmodified
+matrix([[1, 2],
+       [5, 8]])
+>>> asanyarray([1,2,3]) # a new array is constructed from the list
+array([1, 2, 3])
+See also: asmatrix, asarray, array, mat
+
+
+asmatrix()
+
+
+>>> from numpy import *
+>>> a = array([[1,2],[5,8]])
+>>> a
+array([[1, 2],
+       [5, 8]])
+>>> m = asmatrix(a) # m is matrix type with same contents as a -- data is not copied
+>>> m
+matrix([[1, 2],
+       [5, 8]])
+>>> a[0,0] = -99
+>>> a
+array([[-99, 2],
+       [ 5, 8]])
+>>> m # no copy was made so modifying a modifies m, and vice versa
+matrix([[-99, 2],
+       [ 5, 8]])
+See also: asarray, array, matrix, mat
+
+
+astype()
+
+
+>>> from numpy import *
+>>> x = array([1,2,3])
+>>> y = x.astype(float64) # convert from int32 to float64
+>>> type(y[0])
+<type 'numpy.float64'>
+>>> x.astype(None) # None implies converting to the default (float64)
+array([1., 2., 3.])
+See also: cast, dtype, ceil, floor, round_, fix
+
+
+atleast_1d()
+
+
+>>> from numpy import *
+>>> a = 1 # 0-d array
+>>> b = array([2,3]) # 1-d array
+>>> c = array([[4,5],[6,7]]) # 2-d array
+>>> d = arange(8).reshape(2,2,2) # 3-d array
+>>> d
+array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])
+>>> atleast_1d(a,b,c,d) # all output arrays have dim >= 1
+[array([1]), array([2, 3]), array([[4, 5],
+       [6, 7]]), array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])]
+See also: atleast_2d, atleast_3d, newaxis, expand_dims
+
+
+atleast_2d()
+
+
+>>> from numpy import *
+>>> a = 1 # 0-d array
+>>> b = array([2,3]) # 1-d array
+>>> c = array([[4,5],[6,7]]) # 2-d array
+>>> d = arange(8).reshape(2,2,2) # 3-d array
+>>> d
+array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])
+>>> atleast_2d(a,b,c,d) # all output arrays have dim >= 2
+[array([[1]]), array([[2, 3]]), array([[4, 5],
+       [6, 7]]), array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])]
+See also: atleast_1d, atleast_3d, newaxis, expand_dims
+
+
+atleast_3d()
+
+
+>>> from numpy import *
+>>> a = 1 # 0-d array
+>>> b = array([2,3]) # 1-d array
+>>> c = array([[4,5],[6,7]]) # 2-d array
+>>> d = arange(8).reshape(2,2,2) # 3-d array
+>>> d
+array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])
+>>> atleast_3d(a,b,c,d) # all output arrays have dim >= 3
+[array([[[1]]]), array([[[2],
+        [3]]]), array([[[4],
+        [5]],
+       [[6],
+        [7]]]), array([[[0, 1],
+        [2, 3]],
+       [[4, 5],
+        [6, 7]]])]
+See also: atleast_1d, atleast_2d, newaxis, expand_dims
+
+
+average()
+
+
+>>> from numpy import *
+>>> a = array([1,2,3,4,5])
+>>> w = array([0.1, 0.2, 0.5, 0.2, 0.2]) # weights, not necessarily normalized
+>>> average(a) # plain mean value
+3.0
+>>> average(a,weights=w) # weighted average
+3.1666666666666665
+>>> average(a,weights=w,returned=True) # output = weighted average, sum of weights
+(3.1666666666666665, 1.2)
+See also: mean, median
+
+
+beta()
+
+
+>>> from numpy import *
+>>> from numpy.random import *
+>>> beta(a=1,b=10,size=(2,2)) # Beta distribution alpha=1, beta=10
+array([[ 0.02571091, 0.04973536],
+       [ 0.04887027, 0.02382052]])
+See also: seed
+
+
+binary_repr()
+
+
+>>> from numpy import *
+>>> a = 25
+>>> binary_repr(a) # binary representation of 25
+'11001'
+>>> b = float_(pi) # numpy float has extra functionality ...
+>>> b.nbytes # ... like the number of bytes it takes
+8
+>>> binary_repr(b.view('u8')) # view float number as an 8 byte integer, then get binary bitstring
+'1010100010001000010110100011000'
+
+bincount()
+
+
+>>> from numpy import *
+>>> a = array([1,1,1,1,2,2,4,4,5,6,6,6]) # doesn't need to be sorted
+>>> bincount(a) # 0 occurs 0 times, 1 occurs 4 times, 2 occurs twice, 3 occurs 0 times, ...
+array([0, 4, 2, 0, 2, 1, 3])
+>>> a = array([5,4,4,2,2])
+>>> w = array([0.1, 0.2, 0.1, 0.3, 0.5])
+>>> bincount(a) # 0 & 1 don't occur, 2 occurs twice, 3 doesn't occur, 4 occurs twice, 5 once
+array([0, 0, 2, 0, 2, 1])
+>>> bincount(a, weights=w)
+array([ 0. , 0. , 0.8, 0. , 0.3, 0.1])
+>>> # 0 occurs 0 times -> result[0] = 0
+>>> # 1 occurs 0 times -> result[1] = 0
+>>> # 2 occurs at indices 3 & 4 -> result[2] = w[3] + w[4]
+>>> # 3 occurs 0 times -> result[3] = 0
+>>> # 4 occurs at indices 1 & 2 -> result[4] = w[1] + w[2]
+>>> # 5 occurs at index 0 -> result[5] = w[0]
+See also: histogram, digitize
+
+
+binomial()
+
+
+>>> from numpy import *
+>>> from numpy.random import *
+>>> binomial(n=100,p=0.5,size=(2,3)) # binomial distribution n trials, p= success probability
+array([[38, 50, 53],
+       [56, 48, 54]])
+>>> from pylab import * # histogram plot example
+>>> hist(binomial(100,0.5,(1000)), 20)
+See also: random_sample, uniform, standard_normal, seed
+
+
+bitwise_and()
+
+
+>>> from numpy import *
+>>> bitwise_and(array([2,5,255]), array([4,4,4]))
+array([0, 4, 4])
+>>> bitwise_and(array([2,5,255,2147483647L],dtype=int32), array([4,4,4,2147483647L],dtype=int32))
+array([ 0, 4, 4, 2147483647])
+See also: bitwise_or, bitwise_xor, logical_and
+
+
+bitwise_or()
+
+
+>>> from numpy import *
+>>> bitwise_or(array([2,5,255]), array([4,4,4]))
+array([ 6, 5, 255])
+>>> bitwise_or(array([2,5,255,2147483647L],dtype=int32), array([4,4,4,2147483647L],dtype=int32))
+array([ 6, 5, 255, 2147483647])
+See also: bitwise_and, bitwise_xor, logical_or
+
+
+bitwise_xor()
+
+
+>>> from numpy import *
+>>> bitwise_xor(array([2,5,255]), array([4,4,4]))
+array([ 6, 1, 251])
+>>> bitwise_xor(array([2,5,255,2147483647L],dtype=int32), array([4,4,4,2147483647L],dtype=int32))
+array([ 6, 1, 251, 0])
+See also: bitwise_and, bitwise_or, logical_xor
+
+
+bmat()
+
+
+>>> from numpy import *
+>>> a = mat('1 2; 3 4')
+>>> b = mat('5 6; 7 8')
+>>> bmat('a b; b a') # all elements must be existing symbols
+matrix([[1, 2, 5, 6],
+       [3, 4, 7, 8],
+       [5, 6, 1, 2],
+       [7, 8, 3, 4]])
+See also: mat
+
+
+broadcast()
+
+
+>>> from numpy import *
+>>> a = array([[1,2],[3,4]])
+>>> b = array([5,6])
+>>> c = broadcast(a,b)
+>>> c.nd # the number of dimensions in the broadcasted result
+2
+>>> c.shape # the shape of the broadcasted result
+(2, 2)
+>>> c.size # total size of the broadcasted result
+4
+>>> for value in c: print value
+...
+(1, 5)
+(2, 6)
+(3, 5)
+(4, 6)
+>>> c.reset() # reset the iterator to the beginning
+>>> c.next() # next element
+(1, 5)
+See also: ndenumerate, ndindex, flat
+
+
+bytes()
+
+
+>>> from numpy import *
+>>> from numpy.random import bytes
+>>> print repr(bytes(5)) # string of 5 random bytes
+'o\x07\x9f\xdf\xdf'
+>>> print repr(bytes(5)) # another string of 5 random bytes
+'\x98\xc9KD\xe0'
+See also: shuffle, permutation, seed
+
+
+c_[]
+
+
+>>> from numpy import *
+>>> c_[1:5] # for single ranges, c_ works like r_
+array([1, 2, 3, 4])
+>>> c_[1:5,2:6] # for comma separated values, c_ stacks column-wise
+array([[1, 2],
+       [2, 3],
+       [3, 4],
+       [4, 5]])
+>>> a = array([[1,2,3],[4,5,6]])
+>>> c_[a,a] # concatenation along last (default) axis (column-wise, that's why it's called c_)
+array([[1, 2, 3, 1, 2, 3],
+       [4, 5, 6, 4, 5, 6]])
+>>> c_['0',a,a] # concatenation along 1st axis, equivalent to r_[a,a]
+array([[1, 2, 3],
+       [4, 5, 6],
+       [1, 2, 3],
+       [4, 5, 6]])
+See also: r_, hstack, vstack, column_stack, concatenate, bmat, s_
+
+
+cast[]()
+
+
+>>> from numpy import *
+>>> x = arange(3)
+>>> x.dtype
+dtype('int32')
+>>> cast['int64'](x)
+array([0, 1, 2], dtype=int64)
+>>> cast['uint'](x)
+array([0, 1, 2], dtype=uint32)
+>>> cast[float128](x)
+array([0.0, 1.0, 2.0], dtype=float128)
+>>> cast.keys() # list dtype cast possibilities
+<snip>
+See also: astype, typeDict
+
+
+ceil()
+
+
+>>> from numpy import *
+>>> a = array([-1.7, -1.5, -0.2, 0.2, 1.5, 1.7])
+>>> ceil(a) # nearest integers greater-than or equal to a
+array([-1., -1., -0., 1., 2., 2.])
+See also: floor, round_, fix, astype
+
+
+choose()
+
+
+>>> from numpy import *
+>>> choice0 =array([10,12,14,16]) # selector and choice arrays must be equally sized
+>>> choice1 =array([20,22,24,26])
+>>> choice2 =array([30,32,34,36])
+>>> selector = array([0,0,2,1]) # selector can only contain integers in range(number_of_choice_arrays)
+>>> selector.choose(choice0,choice1,choice2)
+array([10, 12, 34, 26])
+>>> a = arange(4)
+>>> choose(a >= 2, (choice0, choice1)) # separate function also exists
+array([10, 12, 24, 26])
+See also: compress, take, where, select
+
+
+clip()
+
+
+>>> from numpy import *
+>>> a = array([5,15,25,3,13])
+>>> a.clip(min=10,max=20)
+array([10, 15, 20, 10, 13])
+>>> clip(a,10,20) # this syntax also exists
+See also: where compress
+
+
+column_stack()
+
+
+>>> from numpy import *
+>>> a = array([1,2])
+>>> b = array([3,4])
+>>> c = array([5,6])
+>>> column_stack((a,b,c)) # a,b,c are 1-d arrays with equal length
+array([[1, 3, 5],
+       [2, 4, 6]])
+See also: concatenate, dstack, hstack, vstack, c_
+
+
+compress()
+
+
+>>> from numpy import *
+>>> a = array([10, 20, 30, 40])
+>>> condition = (a > 15) & (a < 35)
+>>> condition
+array([False, True, True, False], dtype=bool)
+>>> a.compress(condition)
+array([20, 30])
+>>> a[condition] # same effect
+array([20, 30])
+>>> compress(a >= 30, a) # this form also exists
+array([30, 40])
+>>> b = array([[10,20,30],[40,50,60]])
+>>> b.compress(b.ravel() >= 22)
+array([30, 40, 50, 60])
+>>> x = array([3,1,2])
+>>> y = array([50, 101])
+>>> b.compress(x >= 2, axis=1) # illustrates the use of the axis keyword
+array([[10, 30],
+       [40, 60]])
+>>> b.compress(y >= 100, axis=0)
+array([[40, 50, 60]])
+See also: choose, take, where, trim_zeros, unique, unique1d
+
+
+concatenate()
+
+
+>>> from numpy import *
+>>> x = array([[1,2],[3,4]])
+>>> y = array([[5,6],[7,8]])
+>>> concatenate((x,y)) # default is axis=0
+array([[1, 2],
+       [3, 4],
+       [5, 6],
+       [7, 8]])
+>>> concatenate((x,y),axis=1)
+array([[1, 2, 5, 6],
+       [3, 4, 7, 8]])
+See also: append, column_stack, dstack, hstack, vstack, array_split
+
+
+conj()
+
+Synonym for conjugate()
+
+See conjugate()
+
+
+conjugate()
+
+
+>>> a = array([1+2j,3-4j])
+>>> a.conj() # .conj() and .conjugate() are the same
+array([ 1.-2.j, 3.+4.j])
+>>> a.conjugate()
+array([ 1.-2.j, 3.+4.j])
+>>> conj(a) # is also possible
+>>> conjugate(a) # is also possible
+See also: vdot
+
+
+copy()
+
+
+>>> from numpy import *
+>>> a = array([1,2,3])
+>>> a
+array([1, 2, 3])
+>>> b = a # b is a reference to a
+>>> b[1] = 4
+>>> a
+array([1, 4, 3])
+>>> a = array([1,2,3])
+>>> b = a.copy() # b is now an independent copy of a
+>>> b[1] = 4
+>>> a
+array([1, 2, 3])
+>>> b
+array([1, 4, 3])
+See also: view
+
+
+corrcoef()
+
+
+>>> from numpy import *
+>>> T = array([1.3, 4.5, 2.8, 3.9]) # temperature measurements
+>>> P = array([2.7, 8.7, 4.7, 8.2]) # corresponding pressure measurements
+>>> print corrcoef([T,P]) # correlation matrix of temperature and pressure
+[[ 1. 0.98062258]
+ [ 0.98062258 1. ]]
+>>> rho = array([8.5, 5.2, 6.9, 6.5]) # corresponding density measurements
+>>> data = column_stack([T,P,rho])
+>>> print corrcoef([T,P,rho]) # correlation matrix of T,P and rho
+[[ 1. 0.98062258 -0.97090288]
+ [ 0.98062258 1. -0.91538464]
+ [-0.97090288 -0.91538464 1. ]]
+See also: cov, var
+
+
+cos()
+
+
+>>> cos(array([0, pi/2, pi]))
+array([ 1.00000000e+00, 6.12303177e-17, -1.00000000e+00])
+
+cov()
+
+
+>>> from numpy import *
+>>> x = array([1., 3., 8., 9.])
+>>> variance = cov(x) # normalized by N-1
+>>> variance = cov(x, bias=1) # normalized by N
+>>> T = array([1.3, 4.5, 2.8, 3.9]) # temperature measurements
+>>> P = array([2.7, 8.7, 4.7, 8.2]) # corresponding pressure measurements
+>>> cov(T,P) # covariance between temperature and pressure
+3.9541666666666657
+>>> rho = array([8.5, 5.2, 6.9, 6.5]) # corresponding density measurements
+>>> data = column_stack([T,P,rho])
+>>> print cov(data) # covariance matrix of T,P and rho
+[[ 1.97583333 3.95416667 -1.85583333]
+ [ 3.95416667 8.22916667 -3.57083333]
+ [-1.85583333 -3.57083333 1.84916667]]
+See also: corrcoef, std, var
+
+
+cross()
+
+
+>>> from numpy import *
+>>> x = array([1,2,3])
+>>> y = array([4,5,6])
+>>> cross(x,y) # vector cross-product
+array([-3, 6, -3])
+See also: inner, ix_, outer
+
+
+cumprod()
+
+
+>>> from numpy import *
+>>> a = array([1,2,3])
+>>> a.cumprod() # total product 1*2*3 = 6, and intermediate results 1, 1*2
+array([1, 2, 6])
+>>> cumprod(a) # also exists
+array([1, 2, 6])
+>>> a = array([[1,2,3],[4,5,6]])
+>>> a.cumprod(dtype=float) # specify type of output
+array([1., 2., 6., 24., 120., 720.])
+>>> a.cumprod(axis=0) # for each of the 3 columns: product and intermediate results
+array([[ 1, 2, 3],
+       [ 4, 10, 18]])
+>>> a.cumprod(axis=1) # for each of the two rows: product and intermediate results
+array([[ 1, 2, 6],
+       [ 4, 20, 120]])
+See also: accumulate, prod, cumsum
+
+
+cumsum()
+
+
+>>> from numpy import *
+>>> a = array([1,2,3]) # cumulative sum = intermediate summing results & total sum
+>>> a.cumsum()
+array([1, 3, 6])
+>>> cumsum(a) # also exists
+array([1, 3, 6])
+>>> a = array([[1,2,3],[4,5,6]])
+>>> a.cumsum(dtype=float) # specifies type of output value(s)
+array([ 1., 3., 6., 10., 15., 21.])
+>>> a.cumsum(axis=0) # sum over rows for each of the 3 columns
+array([[1, 2, 3],
+       [5, 7, 9]])
+>>> a.cumsum(axis=1) # sum over columns for each of the 2 rows
+array([[ 1, 3, 6],
+       [ 4, 9, 15]])
+See also: accumulate, sum, cumprod
+
+
+delete()
 >>> from numpy import *
 >>> a = array([0, 10, 20, 30, 40])
 >>> delete(a, [2,4]) # remove a[2] and a[4]
