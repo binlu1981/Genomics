@@ -111,4 +111,41 @@ print b
  [[ 4  5]
   [10 11]]]
 """
+#how to exchange position of [4 5] and [10 11]?
+print a[:,2,:]
+"""
+[[ 4, 5]
+ [10,11]]
+"""
+print a[::-1,2,:]
+"""
+[[10,11]
+ [ 4, 5]]
+"""
+a[:,2,:]=a[::-1,2,:]
+print a 
+"""
+[[[ 0  1]
+  [ 2  3]
+  [10 11]]
+ [[ 6  7]
+  [ 8  9]
+  [ 4  5]]]
+"""
+import matplotlib.pyplot as plt
+a = np.linspace(0,2*np.pi,50)
+b = np.sin(a)
+plt.plot(a,b)
+mask = b >=0
+plt.plot(a[mask],b[b>=0],'bo')
+mask = (b >=0) & (a<= np.pi/2)
+plt.plot(a[mask],b[mask])
+plt.show()
 
+a = np.arange(0,100,10)
+print a[a>60]
+#[70,80,90]
+print np.where(a > 60)
+#(array([7,8,9]),)
+print np.where(a>60)[0]
+#[7,8,9]
