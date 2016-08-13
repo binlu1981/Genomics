@@ -1,5 +1,5 @@
 git test
-numpy test
+numpy testcommand
 
 import numpy as np
 
